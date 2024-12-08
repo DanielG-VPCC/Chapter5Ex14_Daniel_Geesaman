@@ -15,10 +15,10 @@ which one would be at the end of the line. You may assume that no two students h
 Input Validation: Do not accept a number less than 1 or greater than 25 for the number of students.
 
 
-24. Student Line Up Part 2 
+24. Student Line Up Part 2
 
 Using Files —Student Line Up- Create a second branch for this project and modify your program to do the following:
-Create a new branch in your Exercise 14 project that modifies the Student Line Up program described in Programming Challenge 14 
+Create a new branch in your Exercise 14 project that modifies the Student Line Up program described in Programming Challenge 14
 so it reads the student names from the file LineUp.txt. The program should read names from the file until there is no more data to read.
 */
 
@@ -26,43 +26,57 @@ so it reads the student names from the file LineUp.txt. The program should read 
 #include <fstream>
 using namespace std;
 
-int numberStudents();
-void studentNameInput(int students);
+//int numberStudents();
+void studentNameInput();
 
 int main()
 {
 	static string names[50];
-	int students = numberStudents();
-	studentNameInput(students);
+	//int students = numberStudents();
+	studentNameInput();
 }
 
-int numberStudents()
-{
-	int students;
-	cout << "How many students are in your class? (1-25)" << endl;
-	cin >> students;
-	while (students < 1 || students > 25)
-	{
-		cout << "Please input a valid answer. " << endl;
-		cout << "How many students are in your class? (1-25)" << endl;
-		cin >> students;
-	}
-	return students;
-}
+//int numberStudents()
+//{
+//	int students;
+//	cout << "How many students are in your class? (1-25)" << endl;
+//	cin >> students;
+//	while (students < 1 || students > 25)
+//	{
+//		cout << "Please input a valid answer. " << endl;
+//		cout << "How many students are in your class? (1-25)" << endl;
+//		cin >> students;
+//	}
+//	return students;
+//}
 
-void studentNameInput(int students)
+void studentNameInput()
 {
 	string names[50];
-	for (int index = 0; index < students; index++)
+	/*for (int index = 0; index < students; index++)
 	{
 		cout << "enter student's name: " << endl;
 		cin >> names[index];
 	}
-	cout << endl;
+	cout << endl;*/
+
+	fstream fhandle;
+	string fileName;
+	cout << "what is the name of your file?" << endl;
+	cin >> fileName;
+
+	string goToNames;
+	int index1=0;
+	fhandle.open(fileName);
+	while (fhandle >> goToNames)
+	{
+		index1++;
+		names[index1] = goToNames;
+	}
 
 	int maxNum;
 
-	for (maxNum = students - 1; maxNum > 0; maxNum--)
+	for (maxNum = index1 - 1; maxNum > 0; maxNum--)
 	{
 		for (int index = 0; index < maxNum; index++)
 		{
@@ -73,9 +87,9 @@ void studentNameInput(int students)
 		}
 	}
 
-	for (int index = 0; index < students; index++)
+	for (int index = 0; index < index1; index++)
 	{
 		cout << names[index] << endl;
 	}
-	
+
 }
